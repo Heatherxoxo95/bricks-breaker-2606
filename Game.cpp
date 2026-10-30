@@ -88,7 +88,11 @@ void Game::Render() const
 	{
 		brick.Draw();
 	}
-
+	if (bricks.empty())
+	{
+		Console::SetCursorPosition(20, 15);
+		std::cout << "You win! Press 'R' to play again.";
+	}
 	Console::Lock(false);
 }
 
@@ -113,8 +117,10 @@ void Game::CheckCollision()
 	}
 
 	// TODO #6 - If no bricks remain, pause ball and display (render) victory text with R to reset
-
-
+	if (bricks.empty())
+	{
+		ball.moving = false;
+	}
 	if (paddle.Contains(ball.x_position + ball.x_velocity, ball.y_velocity + ball.y_position))
 	{
 		ball.y_velocity *= -1;
